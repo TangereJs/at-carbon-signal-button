@@ -1,0 +1,13 @@
+{
+  "name": "at-carbon-signal-button",
+  "version": "0.0.0.1",
+  "private": true,
+  "dependencies": {
+    "polymer": "Polymer/polymer#master",
+    "iron-label": "PolymerElements/iron-label#master",
+    "at-doc-viewer": "TangereJs/at-doc-viewer#0.8-preview",
+    "at-theme": "TangereJs/at-theme#0.8-preview",
+    "at-carbon-button": "TangereJs/at-carbon-button#0.8-preview",
+    "at-carbon-icon-button": "TangereJs/at-carbon-icon-button#0.8-preview"
+  }
+}

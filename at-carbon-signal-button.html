@@ -1,0 +1,84 @@
+<link rel="import" href="../tangere/tangere.html">
+<link rel="import" href="../at-i18n/at-i18n-behavior.html">
+<link rel="import" href="../at-theme/at-theme.html">
+<link rel="import" href="../at-carbon-button/at-carbon-button.html">
+<link rel="import" href="../at-carbon-icon-button/at-carbon-icon-button.html">
+
+<dom-module id="at-carbon-signal-button">
+  <template>
+    <style include="at-form-common"></style>
+    <style>
+      .background-green {
+        background-color: var(--at-green);
+      }
+
+      .color-white {
+        color: #FFFFFF;
+      }
+
+      .color-black {
+        color: #000000;
+      }
+
+      at-carbon-icon-button {
+        vertical-align: middle;
+        padding: 4px;
+      }
+
+      iron-label {
+        vertical-align: middle;
+        line-height: 1;
+        margin-right: 0.29em;
+      }
+    </style>
+    <div id="atContainer" class="at-container">
+      <at-carbon-button id="button" disabled$="[[disabled]]" class="background-green">
+        <template is="dom-if" if="{{_isSubmit(xtype)}}">
+          <at-carbon-icon-button disabled$="[[disabled]]" icon="now:checkmark" color="white"></at-carbon-icon-button>
+          <iron-label id="submitLabel" disabled$="[[disabled]]" class="color-white">{{_getText("Submit")}}</iron-label>
+        </template>
+        <template is="dom-if" if="{{_isCancel(xtype)}}">
+          <at-carbon-icon-button disabled$="[[disabled]]" icon="now:cancel" color="black"></at-carbon-icon-button>
+          <iron-label id="cancelLabel" disabled$="[[disabled]]" class="color-black">{{_getText("Cancel")}}</iron-label>
+        </template>
+      </at-carbon-button>
+    </div>
+  </template>
+  <script>
+    'use strict';
+    Polymer({
+      is: 'at-carbon-signal-button',
+      behaviors: [ Tangere.behaviors.i18n ],
+      properties: {
+        disabled: {
+          type: Boolean,
+          value: false,
+          observer: 'disabledChanged'
+        }
+      },
+      _getText: function (text) {
+        return this.T(text);
+      },
+      ready: function() {
+      },
+      xtypeChanged: function (newValue, oldValue) {
+        var button = this.$.button;
+        this.toggleClass('background-green', newValue === "submit", button);
+      },
+      disabledChanged: function (newValue, oldValue) {
+        if (this.xtype === "submit") {
+          var button = this.$.button;
+          this.toggleClass('background-green', !newValue, button);
+
+          var submitLabel = this.$$('#submitLabel');
+          this.toggleClass('disabled', newValue, submitLabel);
+          this.toggleClass('color-white', !newValue, submitLabel);
+          this.toggleClass('color-black', newValue, submitLabel);
+        } else {
+          var cancelLabel = this.$$('#cancelLabel');
+          this.toggleClass('disabled', newValue, cancelLabel);
+        }
+      }
+    });
+  </script>
+</dom-module>
