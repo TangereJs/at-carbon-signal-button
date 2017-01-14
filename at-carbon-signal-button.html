@@ -8,7 +8,7 @@
   <template>
     <style include="at-form-common"></style>
     <style>
-      .background-green {
+      /*.background-green {
         background-color: var(--at-green);
       }
 
@@ -29,55 +29,54 @@
         vertical-align: middle;
         line-height: 1;
         margin-right: 0.29em;
-      }
+      }*/
     </style>
-    <div id="atContainer" class="at-container">
-      <at-carbon-button id="button" disabled$="[[disabled]]" class="background-green">
-        <template is="dom-if" if="{{_isSubmit(xtype)}}">
-          <at-carbon-icon-button disabled$="[[disabled]]" icon="now:checkmark" color="white"></at-carbon-icon-button>
-          <label id="submitLabel" disabled$="[[disabled]]" class="color-white">{{_getText("Submit")}}</label>
-        </template>
-        <template is="dom-if" if="{{_isCancel(xtype)}}">
-          <at-carbon-icon-button disabled$="[[disabled]]" icon="now:cancel" color="black"></at-carbon-icon-button>
-          <label id="cancelLabel" disabled$="[[disabled]]" class="color-black">{{_getText("Cancel")}}</label>
-        </template>
-      </at-carbon-button>
-    </div>
+
+    <at-carbon-button id="button" on-click="ignoreEvent" on-tap="ontap" disabled$="[[disabled]]">
+      <iron-label id="submitLabel" disabled$="[[disabled]]">
+        <content></content>
+      </iron-label>
+    </at-carbon-button>
   </template>
   <script>
     'use strict';
     Polymer({
       is: 'at-carbon-signal-button',
-      behaviors: [ Tangere.behaviors.i18n ],
+      behaviors: [Tangere.behaviors.i18n],
       properties: {
         disabled: {
           type: Boolean,
           value: false,
           observer: 'disabledChanged'
+        },
+        signal: {
+          type: String,
+          value: '',
+          notify: true
+        },
+        signalData: {
+          type: String,
+          value: '',
+          notify: true
         }
       },
-      _getText: function (text) {
-        return this.T(text);
+      ontap: function (e) {
+        if (this.signal) {
+          Polymer.signal(this.signal, this.signalData);
+        }
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
       },
-      ready: function() {
+      ignoreEvent: function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
       },
-      xtypeChanged: function (newValue, oldValue) {
-        var button = this.$.button;
-        this.toggleClass('background-green', newValue === "submit", button);
+      ready: function () {
       },
       disabledChanged: function (newValue, oldValue) {
-        if (this.xtype === "submit") {
-          var button = this.$.button;
-          this.toggleClass('background-green', !newValue, button);
 
-          var submitLabel = this.$$('#submitLabel');
-          this.toggleClass('disabled', newValue, submitLabel);
-          this.toggleClass('color-white', !newValue, submitLabel);
-          this.toggleClass('color-black', newValue, submitLabel);
-        } else {
-          var cancelLabel = this.$$('#cancelLabel');
-          this.toggleClass('disabled', newValue, cancelLabel);
-        }
       }
     });
   </script>
