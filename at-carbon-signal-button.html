@@ -60,9 +60,11 @@
           notify: true
         }
       },
+
       ontap: function (e) {
         if (this.signal) {
-          Polymer.signal(this.signal, this.signalData);
+          var arg = { data: this.signalData, sender: this };
+          Polymer.signal(this.signal, arg);
         }
         e.preventDefault();
         e.stopPropagation();
