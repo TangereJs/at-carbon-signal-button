@@ -41,7 +41,7 @@
       }*/
     </style>
 
-    <at-carbon-button id="button" on-click="ignoreEvent" on-tap="ontap" disabled$="[[disabled]]">
+    <at-carbon-button id="button" on-click="ignoreEvent" on-tap="ontap" disabled$="[[disabled]]" button-type="[[buttonType]]" button-color="[[buttonColor]]">
       <iron-label id="submitLabel" disabled$="[[disabled]]">
         <content></content>
       </iron-label>
@@ -67,7 +67,43 @@
           type: String,
           value: '',
           notify: true
+        },
+        
+        buttonType: {
+          type: String,
+          value: "text",
+          xtype: 'enum',
+          required: true,
+          xvaluelist: [
+            { title: "Text", value: "text" },
+            { title: "Contained", value: "contained" }
+          ]
+        },
+
+        buttonColor: {
+          type: String,
+          value: "primary",
+          xtype: 'enum',
+          required: true,
+          xvaluelist: [
+            { title: "Primary", value: "primary" },
+            { title: "Confirm", value: "confirm" },
+            { title: "Decline", value: "decline" },
+            { title: "Cancel", value: "cancel" },
+            { title: "Blue", value: "blue" },
+            { title: "Green", value: "green" },
+            { title: "Orange", value: "orange" },
+            { title: "Pink", value: "pink" },
+            { title: "Purple", value: "purple" },
+            { title: "Red", value: "red" },
+            { title: "Teal", value: "teal" },
+            { title: "Yellow", value: "yellow" },
+            { title: "Grey", value: "grey" },
+            { title: "Black", value: "black" },
+            { title: "White", value: "white" }
+          ]
         }
+
       },
 
       ontap: function (e) {
