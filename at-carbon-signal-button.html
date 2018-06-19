@@ -1,21 +1,17 @@
 <link rel="import" href="../tangere/tangere.html">
 <link rel="import" href="../at-i18n/at-i18n-behavior.html">
-<link rel="import" href="../at-theme/at-theme.html">
+<link rel="import" href="../at-core-style-classes/at-core-style-classes.html">
 <link rel="import" href="../at-carbon-button/at-carbon-button.html">
 <link rel="import" href="../at-carbon-icon-button/at-carbon-icon-button.html">
 
 <dom-module id="at-carbon-signal-button">
   <template>
-    <style include="at-form-common"></style>
-    <style>
-
+    <style include="at-core-style-classes">
       :host {
         display: inline-block;
         position: relative;
       }
-
     </style>
-
     <at-carbon-button id="button" on-click="ignoreEvent" on-tap="ontap" disabled$="[[disabled]]" label="[[label]]" icon="[[icon]]" button-type="[[buttonType]]" button-color="[[buttonColor]]">
       <iron-label id="submitLabel" disabled$="[[disabled]]">
         <content></content>
