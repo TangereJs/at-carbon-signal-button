@@ -3,8 +3,8 @@
   "version": "0.0.0.20",
   "private": true,
   "dependencies": {
-    "polymer": "Polymer/polymer#master",
-    "iron-label": "PolymerElements/iron-label#master",
+    "tangere": "TangereJs/tangere#master",
+    "iron-label": "PolymerElements/iron-label#^2.0.0",
     "at-doc-viewer": "TangereJs/at-doc-viewer#master",
     "at-theme": "TangereJs/at-theme#master",
     "at-carbon-button": "TangereJs/at-carbon-button#master",
